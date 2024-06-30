@@ -1,0 +1,30 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build desktop:debug",
+            "group": "build",
+            "type": "shell",
+            "command": "make build-desktop"
+        },
+        {
+            "label": "build web:debug",
+            "group": "build",
+            "type": "shell",
+            "command": "make build-web"
+        },
+        {
+            "label": "launch live server",
+            "command": "${command:extension.liveServer.goOnline}",
+            "dependsOn": [
+                "build web:debug"
+            ]
+        },
+        {
+            "label": "stop live server",
+            "command": "${command:extension.liveServer.goOffline}"
+        }
+    ]
+}
