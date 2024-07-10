@@ -1,12 +1,14 @@
 package desktop
 
-import g ".."
+import "../src"
 import rl "libs:raylib"
 
 main :: proc() {
-    g.init()
+    using src
+    
+    init()
     for !rl.WindowShouldClose() {
-        g.update()
+        update()
     }
-    g.dispose()
+    dispose()
 }

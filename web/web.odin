@@ -1,6 +1,6 @@
 package web
 
-import g ".."
+import "../src"
 import "base:runtime"
 import "core:math/rand"
 import "core:mem"
@@ -18,6 +18,8 @@ mainMemoryArena: mem.Arena
 
 @(export, link_name = "game_init")
 game_init :: proc "c" () {
+	using src
+
 	ctx = runtime.default_context()
 	context = ctx
 
@@ -26,17 +28,19 @@ game_init :: proc "c" () {
 
 	ctx.allocator = mem.arena_allocator(&mainMemoryArena)
 	ctx.temp_allocator = mem.arena_allocator(&tempAllocatorArena)
-	g.init()
+	init()
 }
 
 @(export, link_name = "game_update")
 game_update :: proc "contextless" () {
+	using src
 	context = ctx
-	g.update()
+	update()
 }
 
 @(export, link_name = "game_dispose")
 game_dispose :: proc "contextless" () {
+	using src
 	context = ctx
-	g.dispose()
+	dispose()
 }
